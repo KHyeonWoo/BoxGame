@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "285311599234",
+    "project_id": "fir-24397",
+    "storage_bucket": "fir-24397.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285311599234:android:8876e02fc11207fd32ea9b",
+        "android_client_info": {
+          "package_name": "com.khw.boxgame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMDdxU4K_y8B_4CRfRyVEUfyOuJqSaB3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285311599234:android:8cc51386b67acbff32ea9b",
+        "android_client_info": {
+          "package_name": "com.khw.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMDdxU4K_y8B_4CRfRyVEUfyOuJqSaB3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
