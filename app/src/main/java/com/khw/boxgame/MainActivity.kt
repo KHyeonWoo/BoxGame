@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.sp
 import com.khw.boxgame.ui.theme.BoxGameTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -190,22 +189,28 @@ fun StopWatchDisplay(
 }
 
 class StopWatch {
-
     var formattedTime by mutableStateOf("00:00:000")
+
+    // 메인 스레드에서 실행되는 코루틴 스코프 생성
     private var coroutineScope = CoroutineScope(Dispatchers.Main)
+
+    // 스톱워치가 활성화되었는지 여부를 나타내는 변수
     var isActive = false
 
     private var timeMillis = 0L
     private var lastTimestamp = 0L
 
+    // 스톱워치 시작 함수
     fun start() {
         if (isActive) return
 
         coroutineScope.launch {
+            // 현재 시간을 마지막 타임스탬프로 설정
             lastTimestamp = System.currentTimeMillis()
             this@StopWatch.isActive = true
+
             while (this@StopWatch.isActive) {
-                delay(10L)
+                delay(10L) // 10밀리초마다 딜레이
                 timeMillis += System.currentTimeMillis() - lastTimestamp
                 lastTimestamp = System.currentTimeMillis()
                 formattedTime = formatTime(timeMillis)
@@ -213,10 +218,12 @@ class StopWatch {
         }
     }
 
+    // 스톱워치 일시 정지 함수
     fun pause() {
         isActive = false
     }
 
+    // 스톱워치 리셋 함수
     fun reset() {
         coroutineScope.cancel()
         coroutineScope = CoroutineScope(Dispatchers.Main)
@@ -226,15 +233,19 @@ class StopWatch {
         isActive = false
     }
 
+    // 경과 시간을 형식화된 문자열로 변환하는 함수
     private fun formatTime(timeMillis: Long): String {
+
         val localDateTime = LocalDateTime.ofInstant(
             Instant.ofEpochMilli(timeMillis),
             ZoneId.systemDefault()
         )
+
         val formatter = DateTimeFormatter.ofPattern(
             "mm:ss:SSS",
             Locale.getDefault()
         )
+
         return localDateTime.format(formatter)
     }
 }
@@ -396,7 +407,7 @@ fun NemoGame(
                 modifier = Modifier.align(alignment = Alignment.End)
             )
             Text(
-                text = "걸린 시간: ${time}",
+                text = "걸린 시간: $time",
                 color = Color.Red,
                 fontSize = 24.sp,
                 modifier = Modifier.align(alignment = Alignment.End)
