@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import com.khw.boxgame.ui.theme.BoxGameTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -366,10 +367,10 @@ fun NemoGame(
                 }
 
                 if (result == 1) {
-
                     stopWatch.pause()
-                    time = stopWatch.formattedTime
                     rememberCoroutineScope.launch(Dispatchers.IO) {
+                        delay(100)
+                        time = stopWatch.formattedTime
                         db.userDao().insertAll(
                             User(
                                 name = name,
